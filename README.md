@@ -1,2 +1,2 @@
 # geoserver_swarm
-YML for geoservr swarm
+YML for geoserver swarm testing, no data persisted.

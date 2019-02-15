@@ -1,0 +1,22 @@
+version: '3'
+services:
+  # geoserver for testing as a service, deploy as stack
+  geoserver_test_service:
+    image: oscarfonts/geoserver:2.13.2
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 6G
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "10008:8080"
+    volumes:
+      - /docker/geoserver_test_service:/var/local/geoserver
+    environment:
+      - http_proxy_host=http://172.20.203.111:3128
+      - CATALINA_OPTS=$JAVA_OPTS -server -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Xms4g -Xmx6g -XX:+UseG1GC -Dorg.geotools.shapefile.datetime=true -Duser.timezone=GMT-3 
